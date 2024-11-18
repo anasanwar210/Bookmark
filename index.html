@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CRUDS">
+  <link rel="shortcut icon" href="images/crud.1024x1024.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/media.css">
+  <title>CRUDS</title>
+</head>
+
+<body>
+  <section id="bookmark" class="bookmark d-flex justify-content-center align-items-center vh-100">
+    <div class="container p-5">
+      <h1 class="text-center text-capitalize mb-3"><i class="fa-solid fa-bookmark"></i> Bookmark your favorite sites <i
+          class="fa-solid fa-bookmark"></i></h1>
+      <div id="bookmarkForm">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="bookmarkName" placeholder="Enter Bookmark Name">
+          <label for="bookmarkName">Site Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="bookmarkURL" placeholder="Enter Bookmark URL">
+          <label for="bookmarkURL">Site URL</label>
+        </div>
+        <button type="button" class="btn btn-primary py-2" id="addBookmarkBtn">Add Bookmark</button>
+      </div>
+      <div id="bookmarkList">
+        <h2>My Bookmarks</h2>
+        <ul id="bookmarks"></ul>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/all.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+*,
+*:after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+
+#bookmark {
+  font-family: "Roboto", sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+h1 {
+  color: #3f51b5;
+  font-size: 2.5rem;
+  animation: slideDown 0.5s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#bookmarkForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 1.1rem;
+  padding: 15px;
+  transition: background-color 0.3s ease;
+}
+
+#bookmarkList {
+  margin-top: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #3f51b5;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
