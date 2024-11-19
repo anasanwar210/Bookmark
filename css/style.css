@@ -13,6 +13,7 @@
 #bookmark {
   font-family: "Roboto";
   background-color: #f0f0f0;
+  overflow: hidden;
 }
 
 .container {
@@ -65,13 +66,13 @@ button {
 }
 
 h2 {
-  text-align: center;
   color: #3f51b5;
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
+/* #notFound{
+  position: absolute;
+ left: 50%;
+ transform: translateX(-50%);
+} */

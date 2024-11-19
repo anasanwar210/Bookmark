@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <section id="bookmark" class="bookmark d-flex justify-content-center align-items-center vh-100">
+  <section id="bookmark" class="bookmark d-flex justify-content-center align-items-cente py-2">
     <div class="container bg-white p-5">
       <h1 class="text-center text-capitalize mb-3"><i class="fa-solid fa-bookmark"></i> Bookmark your favorite sites <i
           class="fa-solid fa-bookmark"></i></h1>
@@ -27,17 +27,36 @@
           <input type="text" class="form-control" id="bookmarkURL" placeholder="Enter Bookmark URL">
           <label for="bookmarkURL">Site URL</label>
         </div>
-        <button type="button" class="btn btn-primary py-2" id="addBookmarkBtn">Add Bookmark</button>
+        <button onclick="addBookmark()" type="button" class="btn btn-primary py-2" id="addBookmarkBtn">Add Bookmark</button>
       </div>
       <div id="bookmarkList">
-        <h2>My Bookmarks</h2>
-        <ul id="bookmarks"></ul>
+        <h2 class="text-center">My Bookmarks</h2>
+        <div class="col-10 m-auto my-4">
+          <input type="text" class="form-control" id="searchInput" placeholder="Search" oninput="bookmarkSearch()">
+        </div>
+        <div class="row">
+          <div id="table-contain" class="col-12">
+            <table class="table col-12 text-center rounded-top-3">
+              <thead class="text-white ">
+                <tr class="rounded-top">
+                  <th>Index</th>
+                  <th class="w-50">Website Name</th>
+                  <th>Visit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody id="showData">
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <script src="js/all.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/index.js"></script>
 </body>
 
