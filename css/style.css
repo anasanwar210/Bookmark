@@ -53,6 +53,8 @@ h1 {
   flex-direction: column;
   gap: 20px;
   margin-bottom: 20px;
+  border: 2px dashed;
+  padding-bottom: 15px;
 }
 
 button {

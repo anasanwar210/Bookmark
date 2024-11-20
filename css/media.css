@@ -1,0 +1,20 @@
+@media (max-width: 767px) {
+  #bookmark .container h1 {
+    font-size: 25px;
+    font-weight: bold;
+    border: 1px dashed;
+    border-radius: 8px;
+    padding: 10px 0;
+    background-color: #5046b3;
+    color: #fff;
+  }
+
+  #bookmark .container h1 > svg {
+    display: none;
+  }
+
+  #addBookmarkBtn{
+    width: fit-content;
+    margin: auto;
+  }
+}
