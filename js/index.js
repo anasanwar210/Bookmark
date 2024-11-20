@@ -69,14 +69,22 @@ function checkAboutBookmarksArray() {
 }
 
 function addBookmark() {
-  let bookmark = {
-    bookmarkName: bookmarkName.value,
-    bookmarkURL: bookmarkURL.value,
-  };
-  bookmarksContainer.push(bookmark);
-  localStorage.setItem("bookmarksStorage", JSON.stringify(bookmarksContainer));
-  clearInputs();
-  display();
+  if (
+    validateData(bookmarkName, "errorMsgName") &&
+    validateData(bookmarkURL, "errorMsgURL")
+  ) {
+    let bookmark = {
+      bookmarkName: bookmarkName.value,
+      bookmarkURL: bookmarkURL.value,
+    };
+    bookmarksContainer.push(bookmark);
+    localStorage.setItem(
+      "bookmarksStorage",
+      JSON.stringify(bookmarksContainer)
+    );
+    clearInputs();
+    display();
+  }
 }
 function display() {
   let bookmarksData = ``;
@@ -103,7 +111,7 @@ function deleteBookmark(index) {
     .fire({
       title: "Are you sure?",
       height: "100vh",
-      text: "You won't be able to revert this!",
+      text: `You won't be able to revert "${bookmarksContainer[index].bookmarkName}"`,
       showCancelButton: true,
       confirmButtonText: "Yes, delete it",
       cancelButtonText: "No, cancel",
@@ -142,4 +150,24 @@ function bookmarkSearch() {
     searchResult += checkAboutBookmarksArray();
   }
   showData.innerHTML = searchResult;
+}
+
+function validateData(input, errMsg) {
+  let inputsRe = {
+    bookmarkName: /^[A-z][a-z]{3,10}\s?[A-z][a-z]{3,10}?$/,
+    bookmarkURL: /(https?:\/\/)?(www.)?\w+\.\w+/gi,
+  };
+
+  let errorMsg = document.getElementById(errMsg);
+  if (inputsRe[input.id].test(input.value)) {
+    input.classList.add("is-valid");
+    input.classList.remove("is-invalid");
+    errorMsg.classList.add("d-none");
+    return true;
+  } else {
+    input.classList.remove("is-valid");
+    input.classList.add("is-invalid");
+    errorMsg.classList.remove("d-none");
+    return false;
+  }
 }

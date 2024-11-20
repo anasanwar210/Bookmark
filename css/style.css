@@ -71,8 +71,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* #notFound{
-  position: absolute;
- left: 50%;
- transform: translateX(-50%);
-} */
+#errorMsgName{
+  transition: 0.5s;
+}

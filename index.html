@@ -19,20 +19,25 @@
       <h1 class="text-center text-capitalize mb-3"><i class="fa-solid fa-bookmark"></i> Bookmark your favorite sites <i
           class="fa-solid fa-bookmark"></i></h1>
       <div id="bookmarkForm">
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="bookmarkName" placeholder="Enter Bookmark Name">
+        <div class="form-floating">
+          <input onblur="validateData(this , 'errorMsgName')" type="text" class="form-control" id="bookmarkName"
+            placeholder="Enter Bookmark Name">
           <label for="bookmarkName">Site Name</label>
+          <p id="errorMsgName" class="alert alert-danger p-2 mt-1 d-none">/^[A-z][a-z]{3,10}\s?[A-z][a-z]{3,10}?$/</p>
         </div>
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="bookmarkURL" placeholder="Enter Bookmark URL">
+        <div class="form-floating">
+          <input onblur="validateData(this , 'errorMsgURL')" type="text" class="form-control" id="bookmarkURL"
+            placeholder="Enter Bookmark URL">
           <label for="bookmarkURL">Site URL</label>
+          <p id="errorMsgURL" class="alert alert-danger p-2 mt-1 d-none">/(https?:\/\/)?(www.)?\w+\.\w+/gi</p>
         </div>
-        <button onclick="addBookmark()" type="button" class="btn btn-primary py-2" id="addBookmarkBtn">Add Bookmark</button>
+        <button onclick="addBookmark()" type="button" class="btn btn-primary py-2" id="addBookmarkBtn">Add
+          Bookmark</button>
       </div>
       <div id="bookmarkList">
         <h2 class="text-center">My Bookmarks</h2>
         <div class="col-10 m-auto my-4">
-          <input type="text" class="form-control" id="searchInput" placeholder="Search" oninput="bookmarkSearch()">
+          <input type="search" class="form-control" id="searchInput" placeholder="Search" oninput="bookmarkSearch()">
         </div>
         <div class="row">
           <div id="table-contain" class="col-12">
