@@ -6,7 +6,9 @@ let searchInput = document.getElementById("searchInput");
 
 let showData = document.getElementById("showData");
 
-let bookmarksContainer = [];
+let bookmarkNameSaved = [],
+  bookmarksContainer = [];
+
 if (localStorage.getItem("bookmarksStorage") !== null) {
   bookmarksContainer = JSON.parse(localStorage.getItem("bookmarksStorage"));
   display();
@@ -34,13 +36,13 @@ function appendRowsInTable(i) {
                 <a class="text-white text-decoration-none" href="${
                   bookmarksContainer[i].bookmarkURL
                 }" target="_blank"><i class="fa-solid fa-eye"></i>
-                Visit</a>
+                <span>Visit</span></a>
               </button>
             </td>
             <td class="align-middle">
               <button onclick="deleteBookmark(${i})" class="btn btn-danger">
                 <i class="fa-solid fa-trash"></i>
-                Delete
+                <span>Delete</span>
               </button>
             </td>
           </tr>
@@ -67,7 +69,6 @@ function checkAboutBookmarksArray() {
    `;
   return msgNotFound;
 }
-
 function addBookmark() {
   if (
     validateData(bookmarkName, "errorMsgName") &&
@@ -77,6 +78,31 @@ function addBookmark() {
       bookmarkName: bookmarkName.value,
       bookmarkURL: bookmarkURL.value,
     };
+    let isExist = bookmarksContainer.some(
+      (container) =>
+        container.bookmarkName === bookmark.bookmarkName &&
+        container.bookmarkURL === bookmark.bookmarkURL
+    );
+    if (isExist) {
+      Swal.fire({
+        title: "Your Bookmark Name Or Url Is Already Exist",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `,
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `,
+        },
+      });
+      return;
+    }
     bookmarksContainer.push(bookmark);
     localStorage.setItem(
       "bookmarksStorage",
@@ -86,6 +112,22 @@ function addBookmark() {
     display();
   }
 }
+
+function test() {
+  for (let i = 0; i < bookmarkNameSaved.length; i++) {
+    if (bookmarkNameSaved[i] != bookmarkName.value) {
+      let result = true;
+      console.log(result);
+      return true;
+    } else {
+      let result = false;
+      console.log(result);
+      return false;
+    }
+  }
+}
+
+function demo() {}
 function display() {
   let bookmarksData = ``;
   for (let i = 0; i < bookmarksContainer.length; i++) {
@@ -97,6 +139,9 @@ function display() {
 function clearInputs() {
   bookmarkName.value = null;
   bookmarkURL.value = null;
+
+  bookmarkName.classList.remove("is-valid");
+  bookmarkURL.classList.remove("is-valid");
 }
 
 function deleteBookmark(index) {
@@ -154,8 +199,8 @@ function bookmarkSearch() {
 
 function validateData(input, errMsg) {
   let inputsRe = {
-    bookmarkName: /^[A-z][a-z]{3,10}\s?[A-z][a-z]{3,10}?$/,
-    bookmarkURL: /(https?:\/\/)?(www.)?\w+\.\w+/gi,
+    bookmarkName: /^[A-z]{3,10}( [A-z]{1,10})?$/,
+    bookmarkURL: /^(https?:\/\/)?(www.)?(\w{2,20})(\.)(\w+){2,}/gi,
   };
 
   let errorMsg = document.getElementById(errMsg);

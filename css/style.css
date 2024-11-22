@@ -35,6 +35,10 @@ h1 {
   color: #3f51b5;
   font-size: 2.5rem;
   animation: slideDown 0.5s ease-in-out;
+  background: #121fcf;
+  background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @keyframes slideDown {
@@ -74,6 +78,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-#errorMsgName{
+#errorMsgName {
   transition: 0.5s;
 }

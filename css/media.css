@@ -1,6 +1,11 @@
 @media (max-width: 767px) {
+  #bookmark .container {
+    /* width: 95% !important;
+  margin: auto; */
+    padding: 20px !important;
+  }
   #bookmark .container h1 {
-    font-size: 25px;
+    font-size: 19px;
     font-weight: bold;
     border: 1px dashed;
     border-radius: 8px;
@@ -13,8 +18,25 @@
     display: none;
   }
 
-  #addBookmarkBtn{
+  #addBookmarkBtn {
     width: fit-content;
     margin: auto;
+  }
+
+  button span {
+    display: none;
+  }
+
+  div:where(.swal2-container) h2:where(.swal2-title) {
+    font-size: 16px !important;
+  }
+
+  div:where(.swal2-container)
+    button:where(.swal2-styled):where(.swal2-confirm) {
+    background-color: #0d6efd;
+  }
+
+  div:where(.swal2-container) div:where(.swal2-popup) {
+    width: 80%;
   }
 }
