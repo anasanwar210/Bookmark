@@ -21,7 +21,11 @@ let eleYouClickOnUpdateBtn, // just one Obj (that User Updated Now)
 - Start Dark Mode
 ================================
 */
-
+document.addEventListener("keyup", function (e) {
+  if (e.key == "Enter") {
+    addBookmark();
+  }
+});
 if (localStorage.getItem("mode") !== null) {
   let stat = JSON.parse(localStorage.getItem("mode"));
   if (stat == true) {
@@ -56,7 +60,10 @@ if (localStorage.getItem("bookmarksStorage") !== null) {
   checkAboutBookmarksArray();
 }
 
-if (localStorage.getItem("bookmarksStorage") === "[]" || localStorage.getItem("bookmarksStorage") === null) {
+if (
+  localStorage.getItem("bookmarksStorage") === "[]" ||
+  localStorage.getItem("bookmarksStorage") === null
+) {
   showData.innerHTML = checkAboutBookmarksArray();
 }
 
