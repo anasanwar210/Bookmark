@@ -303,7 +303,7 @@ function bookmarkSearch() {
 function validateData(input, errMsg) {
   let inputsRe = {
     bookmarkName: /^[A-z]{3,10}( [A-z]{1,10})?$/,
-    bookmarkURL: /^(https?:\/\/)?(www.)?(\w{2,20}\.{1})(\w+){2,}/gi,
+    bookmarkURL: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/[^\s]*)?$/,
   };
 
   let errorMsg = document.getElementById(errMsg);

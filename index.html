@@ -39,7 +39,7 @@
             class="form-control" id="bookmarkURL" placeholder="Enter Bookmark URL">
           <label for="bookmarkURL">Site URL</label>
           <p id="errorMsgURL" class="alert alert-danger p-2 mt-1 d-none">
-            /^(https?:\/\/)?(www.)?(\w{2,20})(\.)(\w+){2,}/gi</p>
+            /^(https?:\/\/)?([A-z0-9-]+\.)+[A-z]{2,6}(\/[^\s]*)?$/</p>
         </div>
         <div class="btnCollection">
           <button onclick="confirmUpdate()" type="button" class="btn btn-warning w-100 my-2 py-2 d-none"
