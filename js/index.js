@@ -56,7 +56,7 @@ if (localStorage.getItem("bookmarksStorage") !== null) {
   checkAboutBookmarksArray();
 }
 
-if (localStorage.getItem("bookmarksStorage") === "[]") {
+if (localStorage.getItem("bookmarksStorage") === "[]" || localStorage.getItem("bookmarksStorage") === null) {
   showData.innerHTML = checkAboutBookmarksArray();
 }
 
