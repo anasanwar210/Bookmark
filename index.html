@@ -14,20 +14,30 @@
 </head>
 
 <body>
-  <section id="bookmark" class="bookmark d-flex justify-content-center align-items-cente py-2">
-    <div class=" container bg-white p-5">
+  <section id="bookmark" class="bookmark  d-flex justify-content-center align-items-cente py-5">
+    <div class="container p-5">
+      <div class="dark-mode position-relative">
+        <input type="checkbox" name="mode" id="mode" />
+        <label onclick="turnDark()" for="mode" class="moon d-block text-dark">
+          <i class="fa-solid fa-moon"></i>
+        </label>
+        <label onclick="turnLight()" for="mode" class="sun text-warning d-none">
+          <i class="fa-regular fa-sun"></i>
+        </label>
+      </div>
       <div id="bookmarkForm" class="p-3 border rounded">
         <h1 class="text-center text-capitalize mb-3"><i class="fa-solid fa-bookmark"></i> Bookmark your favorite sites
-          <i class="fa-solid fa-bookmark"></i></h1>
+          <i class="fa-solid fa-bookmark"></i>
+        </h1>
         <div class="form-floating">
-          <input onblur="validateData(this , 'errorMsgName')" oninput="checkValIncludes(this)" type="text" class="form-control" id="bookmarkName"
-            placeholder="Enter Bookmark Name">
+          <input onblur="validateData(this , 'errorMsgName')" oninput="checkValIncludes(this)" type="text"
+            class="form-control" id="bookmarkName" placeholder="Enter Bookmark Name">
           <label for="bookmarkName">Site Name</label>
           <p id="errorMsgName" class="alert alert-danger p-2 mt-1 d-none">/^[A-z]{3,10}( [A-z]{1,10})?$/</p>
         </div>
         <div class="form-floating">
-          <input onblur="validateData(this , 'errorMsgURL')" oninput="checkValIncludes(this)" type="text" class="form-control" id="bookmarkURL"
-            placeholder="Enter Bookmark URL">
+          <input onblur="validateData(this , 'errorMsgURL')" oninput="checkValIncludes(this)" type="text"
+            class="form-control" id="bookmarkURL" placeholder="Enter Bookmark URL">
           <label for="bookmarkURL">Site URL</label>
           <p id="errorMsgURL" class="alert alert-danger p-2 mt-1 d-none">
             /^(https?:\/\/)?(www.)?(\w{2,20})(\.)(\w+){2,}/gi</p>
@@ -37,13 +47,19 @@
             id="confirmUpdateBtn" disabled>Update Bookmark</button>
           <button onclick="cancelUpdate()" type="button" class="btn btn-danger w-100 my-2 py-2 d-none"
             id="cancelUpdateBtn">Cancel</button>
-          <button onclick="addBookmark()" type="button" class="btn btn-primary w-100 my-2 py-2 d-block" id="addBookmarkBtn">Add
+          <button onclick="addBookmark()" type="button" class="btn btn-primary w-100 my-2 py-2 d-block"
+            id="addBookmarkBtn">Add
             Bookmark</button>
         </div>
       </div>
       <div id="bookmarkList">
-        <h2 class="text-center">My Bookmarks</h2>
-        <div class="col-md-10 m-auto my-4">
+        <h2 class="text-center text-primary fw-bold">My Bookmarks</h2>
+        <div class="col-md-10 m-auto my-4 position-relative">
+          <svg xmlns="http://www.w3.org/2000/svg" class="svg_icon bi-search" viewBox="0 0 16 16">
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+            </path>
+          </svg>
           <input type="search" class="form-control" id="searchInput" placeholder="Search By Bookmark Name ..."
             oninput="bookmarkSearch()">
         </div>
@@ -52,7 +68,7 @@
             <table class="table col-12 text-center rounded-top-3">
               <thead class="text-white ">
                 <tr class="rounded-top">
-                  <th>Index</th>
+                  <th class="text-uppercase">I</th>
                   <th class="w-50">Website Name</th>
                   <th>Visit</th>
                   <th>Update</th>

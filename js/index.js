@@ -4,14 +4,50 @@ let bookmarkName = document.getElementById("bookmarkName"),
   confirmUpdateBtn = document.getElementById("confirmUpdateBtn"),
   cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
 
+let moon = document.querySelector(".moon"),
+  sun = document.querySelector(".sun");
+
 let searchInput = document.getElementById("searchInput");
 
 let showData = document.getElementById("showData");
 
-let eleIndexBeforeUpdate = null;
+let eleIndexBeforeUpdate = null; // Index Of Element ( User Update This Element Now )
 
-let eleYouClickOnUpdateBtn,
+let eleYouClickOnUpdateBtn, // just one Obj (that User Updated Now)
   bookmarksContainer = [];
+
+/*
+================================
+- Start Dark Mode
+================================
+*/
+
+if (localStorage.getItem("mode") !== null) {
+  let stat = JSON.parse(localStorage.getItem("mode"));
+  if (stat == true) {
+    moon.classList.replace("d-block", "d-none");
+    sun.classList.replace("d-none", "d-block");
+    document.documentElement.setAttribute("data-bs-theme", "dark"); // Set Attr In HTML Tag
+  } else if (stat == false) {
+    sun.classList.replace("d-block", "d-none");
+    moon.classList.replace("d-none", "d-block");
+    document.documentElement.setAttribute("data-bs-theme", "light"); // Set Attr In HTML Tag
+  }
+}
+
+function turnDark() {
+  moon.classList.replace("d-block", "d-none");
+  sun.classList.replace("d-none", "d-block");
+  document.documentElement.setAttribute("data-bs-theme", "dark");
+  localStorage.setItem("mode", JSON.stringify(true));
+}
+
+function turnLight() {
+  sun.classList.replace("d-block", "d-none");
+  moon.classList.replace("d-none", "d-block");
+  document.documentElement.setAttribute("data-bs-theme", "light");
+  localStorage.setItem("mode", JSON.stringify(false));
+}
 
 if (localStorage.getItem("bookmarksStorage") !== null) {
   bookmarksContainer = JSON.parse(localStorage.getItem("bookmarksStorage"));
@@ -26,7 +62,7 @@ if (localStorage.getItem("bookmarksStorage") === "[]") {
 
 /*
 ======================================
-- Start Functions Have HTML Code 
+- Start Create HTML Code To Append
 ======================================
 */
 
@@ -61,7 +97,13 @@ function appendRowsInTable(i) {
 
 /*
 ======================================
-- End Functions Have HTML Code 
+- End Create HTML Code To Append
+======================================
+*/
+
+/*
+======================================
+- Start Show Not Found Message
 ======================================
 */
 
@@ -80,6 +122,13 @@ function checkAboutBookmarksArray() {
   return msgNotFound;
 }
 
+/*
+======================================
+- End Show Not Found Message
+======================================
+*/
+
+// [ 1 ]
 function addBookmark() {
   if (
     validateData(bookmarkName, "errorMsgName") &&
@@ -124,6 +173,7 @@ function addBookmark() {
   }
 }
 
+// [ 2 ]
 function display() {
   let bookmarksData = ``;
   for (let i = 0; i < bookmarksContainer.length; i++) {
@@ -132,6 +182,7 @@ function display() {
   showData.innerHTML = bookmarksData;
 }
 
+// [ 3 ]
 function clearInputs() {
   bookmarkName.value = null;
   bookmarkURL.value = null;
@@ -140,7 +191,7 @@ function clearInputs() {
   bookmarkURL.classList.remove("is-valid");
 }
 
-
+// [ 4 ]
 function updateBookmark(index) {
   eleIndexBeforeUpdate = index;
   eleYouClickOnUpdateBtn = bookmarksContainer[index];
@@ -153,6 +204,7 @@ function updateBookmark(index) {
   cancelUpdateBtn.classList.replace("d-none", "d-block");
 }
 
+// [ 4.1 ]
 function checkValIncludes(input) {
   if (addBookmarkBtn.classList.contains("d-none")) {
     if (input.value !== eleYouClickOnUpdateBtn[input.id]) {
@@ -163,6 +215,7 @@ function checkValIncludes(input) {
   }
 }
 
+// [ 4.2 ]
 function confirmUpdate() {
   if (
     validateData(bookmarkName, "errorMsgName") &&
@@ -170,17 +223,18 @@ function confirmUpdate() {
   ) {
     eleYouClickOnUpdateBtn.bookmarkName = bookmarkName.value;
     eleYouClickOnUpdateBtn.bookmarkURL = bookmarkURL.value;
-    bookmarksContainer.splice(eleIndexBeforeUpdate,0,eleYouClickOnUpdateBtn);
+    bookmarksContainer.splice(eleIndexBeforeUpdate, 0, eleYouClickOnUpdateBtn);
     localStorage.setItem(
       "bookmarksStorage",
       JSON.stringify(bookmarksContainer)
     );
     eleYouClickOnUpdateBtn = [];
-    display()
+    display();
     clearInputs();
   }
 }
 
+// [ 4.3 ]
 function cancelUpdate() {
   clearInputs();
   bookmarksContainer.splice(eleIndexBeforeUpdate, 0, eleYouClickOnUpdateBtn);
@@ -190,6 +244,7 @@ function cancelUpdate() {
   display();
 }
 
+// [ 5 ]
 function deleteBookmark(index) {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -226,6 +281,7 @@ function deleteBookmark(index) {
     });
 }
 
+// [ 6 ]
 function bookmarkSearch() {
   let searchResult = ``;
   for (let i = 0; i < bookmarksContainer.length; i++) {
@@ -243,10 +299,11 @@ function bookmarkSearch() {
   showData.innerHTML = searchResult;
 }
 
+// [ 7 ]
 function validateData(input, errMsg) {
   let inputsRe = {
     bookmarkName: /^[A-z]{3,10}( [A-z]{1,10})?$/,
-    bookmarkURL: /^(https?:\/\/)?(www.)?(\w{2,20})(\.)(\w+){2,}/gi,
+    bookmarkURL: /^(https?:\/\/)?(www.)?(\w{2,20}\.{1})(\w+){2,}/gi,
   };
 
   let errorMsg = document.getElementById(errMsg);

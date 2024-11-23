@@ -1,3 +1,15 @@
+:root {
+  --blue-color: #3f51b5;
+  --bookmark-light-bcg: #f0f0f0;
+  --bookmark-dark-bcg: rgba(0, 0, 0, 0.3);
+  --bookmark-form-light-bcg: #eee;
+  --bookmark-form-dark-bcg: #222529;
+  --white-color: #fff;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --title-bcg: #121fcf;
+  --gradient-txt: #cf1512;
+}
+
 *,
 *:after,
 *::before {
@@ -10,15 +22,124 @@
   src: url(../css/fonts/Roboto-Regular.ttf);
 }
 
+@font-face {
+  font-family: "Mono";
+  src: url(../css/fonts/RobotoMono-Regular.ttf);
+}
+
+/* 
+===================================
+- Start Dark Mode Style
+===================================
+*/
+
+input#mode {
+  display: none;
+}
+
+input#mode label{
+  cursor: pointer;
+}
+
+.dark-mode {
+  display: flex;
+  align-items: center;
+  color: var(--white-color);
+  font-size: 35px;
+  top: -4%;
+  left: 100%;
+}
+
+.dark-mode label {
+  cursor: pointer;
+  position: absolute;
+}
+
+/* 
+===================================
+- End Dark Mode Style
+===================================
+*/
+
+/* 
+=====================================
+- Start light Mode
+=====================================
+*/
+
+[data-bs-theme="light"] #bookmark {
+  background-color: var(--bookmark-light-bcg);
+}
+
+[data-bs-theme="light"] #bookmark > .container {
+  background-color: var(--white-color);
+}
+
+[data-bs-theme="light"] #bookmarkForm {
+  background-color: var(--bookmark-form-light-bcg);
+}
+
+[data-bs-theme="light"] #bookmarkForm h1 {
+  background: var(--title-bcg);
+  background: linear-gradient(
+    to right,
+    var(--title-bcg) 0%,
+    var(--gradient-txt) 100%
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root:not(#mode:checked) :where(body, section, header, footer) {
+  transition: all 0.3s linear;
+}
+
+/* 
+=====================================
+- End light Mode
+=====================================
+*/
+
+/* 
+=====================================
+- Start Dark Mode
+=====================================
+*/
+
+[data-bs-theme="dark"] #bookmark {
+  background-color: var(--bookmark-dark-bcg);
+}
+
+[data-bs-theme="dark"] #bookmark > .container {
+  background-color: var(--bookmark-form-dark-bcg) !important;
+}
+
+[data-bs-theme="dark"] #bookmarkForm {
+  background-color: var(--bookmark-form-dark-bcg) !important;
+}
+
+[data-bs-theme="dark"] #bookmarkForm h1 {
+  color: var(--white-color);
+}
+
+:root:has(#mode:checked) :where(body, section, header, footer) {
+  transition: all 0.3s linear;
+}
+
+/* 
+=====================================
+- End Dark Mode
+=====================================
+*/
+
 #bookmark {
   font-family: "Roboto";
-  background-color: #f0f0f0;
   overflow: hidden;
 }
 
 .container {
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow);
   animation: fadeIn 1s ease-in-out;
 }
 
@@ -31,14 +152,10 @@
   }
 }
 
-h1 {
-  color: #3f51b5;
+#bookmarkForm h1 {
+  color: var(--blue-color);
   font-size: 2.5rem;
   animation: slideDown 0.5s ease-in-out;
-  background: #121fcf;
-  background: linear-gradient(to right, #121fcf 0%, #cf1512 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 @keyframes slideDown {
@@ -59,7 +176,6 @@ h1 {
   margin-bottom: 20px;
   border: 2px dashed;
   padding-bottom: 15px;
-  background-color: #eee;
 }
 
 button {
@@ -73,11 +189,29 @@ button {
 }
 
 h2 {
-  color: #3f51b5;
+  color: var(--blue-color);
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
+table {
+  font-family: "Mono";
+}
+
 #errorMsgName {
   transition: 0.5s;
+}
+
+input[type="search"] {
+  padding-left: 35px;
+}
+
+.svg_icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: #4660dc;
+  width: 18px;
+  height: 18px;
 }

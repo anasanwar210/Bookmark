@@ -2,7 +2,7 @@
   #bookmark .container {
     padding: 20px !important;
   }
-  
+
   #bookmark .container h1 {
     font-size: 19px;
     font-weight: bold;
@@ -22,8 +22,16 @@
     margin: auto;
   }
 
+  button {
+    padding: 0 6px !important;
+  }
+
   button span {
     display: none;
+  }
+
+  #table-contain thead {
+    font-size: 14px;
   }
 
   div:where(.swal2-container) h2:where(.swal2-title) {
@@ -37,5 +45,10 @@
 
   div:where(.swal2-container) div:where(.swal2-popup) {
     width: 80%;
+  }
+
+  .dark-mode {
+    top: -5%;
+    left: 92%;
   }
 }
