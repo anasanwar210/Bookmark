@@ -33,9 +33,9 @@
 ===================================
 */
 
-input#mode {
+/* input#mode {
   display: none;
-}
+} */
 
 input#mode label{
   cursor: pointer;
@@ -156,6 +156,7 @@ input#mode label{
   color: var(--blue-color);
   font-size: 2.5rem;
   animation: slideDown 0.5s ease-in-out;
+  user-select: none;
 }
 
 @keyframes slideDown {
