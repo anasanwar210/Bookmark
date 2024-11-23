@@ -1,9 +1,8 @@
 @media (max-width: 767px) {
   #bookmark .container {
-    /* width: 95% !important;
-  margin: auto; */
     padding: 20px !important;
   }
+  
   #bookmark .container h1 {
     font-size: 19px;
     font-weight: bold;

@@ -17,27 +17,35 @@
   <section id="bookmark" class="bookmark d-flex justify-content-center align-items-cente py-2">
     <div class=" container bg-white p-5">
       <div id="bookmarkForm" class="p-3 border rounded">
-        <h1 class="text-center text-capitalize mb-3"><i class="fa-solid fa-bookmark"></i> Bookmark your favorite sites <i
-            class="fa-solid fa-bookmark"></i></h1>
+        <h1 class="text-center text-capitalize mb-3"><i class="fa-solid fa-bookmark"></i> Bookmark your favorite sites
+          <i class="fa-solid fa-bookmark"></i></h1>
         <div class="form-floating">
-          <input onblur="validateData(this , 'errorMsgName')" type="text" class="form-control" id="bookmarkName"
+          <input onblur="validateData(this , 'errorMsgName')" oninput="checkValIncludes(this)" type="text" class="form-control" id="bookmarkName"
             placeholder="Enter Bookmark Name">
           <label for="bookmarkName">Site Name</label>
           <p id="errorMsgName" class="alert alert-danger p-2 mt-1 d-none">/^[A-z]{3,10}( [A-z]{1,10})?$/</p>
         </div>
         <div class="form-floating">
-          <input onblur="validateData(this , 'errorMsgURL')" type="text" class="form-control" id="bookmarkURL"
+          <input onblur="validateData(this , 'errorMsgURL')" oninput="checkValIncludes(this)" type="text" class="form-control" id="bookmarkURL"
             placeholder="Enter Bookmark URL">
           <label for="bookmarkURL">Site URL</label>
-          <p id="errorMsgURL" class="alert alert-danger p-2 mt-1 d-none">/^(https?:\/\/)?(www.)?(\w{2,20})(\.)(\w+){2,}/gi</p>
+          <p id="errorMsgURL" class="alert alert-danger p-2 mt-1 d-none">
+            /^(https?:\/\/)?(www.)?(\w{2,20})(\.)(\w+){2,}/gi</p>
         </div>
-        <button onclick="addBookmark()" type="button" class="btn btn-primary py-2" id="addBookmarkBtn">Add
-          Bookmark</button>
+        <div class="btnCollection">
+          <button onclick="confirmUpdate()" type="button" class="btn btn-warning w-100 my-2 py-2 d-none"
+            id="confirmUpdateBtn" disabled>Update Bookmark</button>
+          <button onclick="cancelUpdate()" type="button" class="btn btn-danger w-100 my-2 py-2 d-none"
+            id="cancelUpdateBtn">Cancel</button>
+          <button onclick="addBookmark()" type="button" class="btn btn-primary w-100 my-2 py-2 d-block" id="addBookmarkBtn">Add
+            Bookmark</button>
+        </div>
       </div>
       <div id="bookmarkList">
         <h2 class="text-center">My Bookmarks</h2>
         <div class="col-md-10 m-auto my-4">
-          <input type="search" class="form-control" id="searchInput" placeholder="Search By Bookmark Name ....." oninput="bookmarkSearch()">
+          <input type="search" class="form-control" id="searchInput" placeholder="Search By Bookmark Name ..."
+            oninput="bookmarkSearch()">
         </div>
         <div class="row">
           <div id="table-contain" class="col-12">
@@ -47,6 +55,7 @@
                   <th>Index</th>
                   <th class="w-50">Website Name</th>
                   <th>Visit</th>
+                  <th>Update</th>
                   <th>Delete</th>
                 </tr>
               </thead>

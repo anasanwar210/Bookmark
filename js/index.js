@@ -1,12 +1,16 @@
 let bookmarkName = document.getElementById("bookmarkName"),
   bookmarkURL = document.getElementById("bookmarkURL"),
-  addBookmarkBtn = document.getElementById("addBookmarkBtn");
+  addBookmarkBtn = document.getElementById("addBookmarkBtn"),
+  confirmUpdateBtn = document.getElementById("confirmUpdateBtn"),
+  cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
 
 let searchInput = document.getElementById("searchInput");
 
 let showData = document.getElementById("showData");
 
-let bookmarkNameSaved = [],
+let eleIndexBeforeUpdate = null;
+
+let eleYouClickOnUpdateBtn,
   bookmarksContainer = [];
 
 if (localStorage.getItem("bookmarksStorage") !== null) {
@@ -40,6 +44,12 @@ function appendRowsInTable(i) {
               </button>
             </td>
             <td class="align-middle">
+              <button onclick="updateBookmark(${i})" class="btn btn-warning">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Update</span>
+              </button>
+            </td>
+            <td class="align-middle">
               <button onclick="deleteBookmark(${i})" class="btn btn-danger">
                 <i class="fa-solid fa-trash"></i>
                 <span>Delete</span>
@@ -58,7 +68,7 @@ function appendRowsInTable(i) {
 function checkAboutBookmarksArray() {
   let msgNotFound = `
     <tr class="bg-danger">
-      <td colspan="4">
+      <td colspan="5">
         <div id="notFound" class="d-flex justify-content-center align-items-center flex-column text-center py-4">
         <div class="not-found-card">
           <i class="fa-solid fa-warning text-warning fa-7x"></i>
@@ -69,6 +79,7 @@ function checkAboutBookmarksArray() {
    `;
   return msgNotFound;
 }
+
 function addBookmark() {
   if (
     validateData(bookmarkName, "errorMsgName") &&
@@ -113,21 +124,6 @@ function addBookmark() {
   }
 }
 
-function test() {
-  for (let i = 0; i < bookmarkNameSaved.length; i++) {
-    if (bookmarkNameSaved[i] != bookmarkName.value) {
-      let result = true;
-      console.log(result);
-      return true;
-    } else {
-      let result = false;
-      console.log(result);
-      return false;
-    }
-  }
-}
-
-function demo() {}
 function display() {
   let bookmarksData = ``;
   for (let i = 0; i < bookmarksContainer.length; i++) {
@@ -142,6 +138,56 @@ function clearInputs() {
 
   bookmarkName.classList.remove("is-valid");
   bookmarkURL.classList.remove("is-valid");
+}
+
+
+function updateBookmark(index) {
+  eleIndexBeforeUpdate = index;
+  eleYouClickOnUpdateBtn = bookmarksContainer[index];
+  bookmarkName.value = bookmarksContainer[index].bookmarkName;
+  bookmarkURL.value = bookmarksContainer[index].bookmarkURL;
+  bookmarksContainer.splice(index, 1);
+  display();
+  addBookmarkBtn.classList.replace("d-block", "d-none");
+  confirmUpdateBtn.classList.replace("d-none", "d-block");
+  cancelUpdateBtn.classList.replace("d-none", "d-block");
+}
+
+function checkValIncludes(input) {
+  if (addBookmarkBtn.classList.contains("d-none")) {
+    if (input.value !== eleYouClickOnUpdateBtn[input.id]) {
+      confirmUpdateBtn.disabled = false;
+    } else {
+      confirmUpdateBtn.disabled = true;
+    }
+  }
+}
+
+function confirmUpdate() {
+  if (
+    validateData(bookmarkName, "errorMsgName") &&
+    validateData(bookmarkURL, "errorMsgURL")
+  ) {
+    eleYouClickOnUpdateBtn.bookmarkName = bookmarkName.value;
+    eleYouClickOnUpdateBtn.bookmarkURL = bookmarkURL.value;
+    bookmarksContainer.splice(eleIndexBeforeUpdate,0,eleYouClickOnUpdateBtn);
+    localStorage.setItem(
+      "bookmarksStorage",
+      JSON.stringify(bookmarksContainer)
+    );
+    eleYouClickOnUpdateBtn = [];
+    display()
+    clearInputs();
+  }
+}
+
+function cancelUpdate() {
+  clearInputs();
+  bookmarksContainer.splice(eleIndexBeforeUpdate, 0, eleYouClickOnUpdateBtn);
+  addBookmarkBtn.classList.replace("d-none", "d-block");
+  confirmUpdateBtn.classList.replace("d-block", "d-none");
+  cancelUpdateBtn.classList.replace("d-block", "d-none");
+  display();
 }
 
 function deleteBookmark(index) {
