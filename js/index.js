@@ -129,6 +129,9 @@ function checkAboutBookmarksArray() {
 - End Show Not Found Message
 ======================================
 */
+window.onload = function () {
+  bookmarkName.focus();
+};
 
 // [ 1 ]
 function addBookmark() {
@@ -174,23 +177,6 @@ function addBookmark() {
     display();
   }
 }
-
-window.onload = function () {
-  bookmarkName.focus();
-};
-
-// [ 1.1 ]
-bookmarkName.addEventListener("keyup", function (e) {
-  if (e.key == "enter") {
-    addBookmark();
-  }
-});
-
-bookmarkURL.addEventListener("keyup", function (e) {
-  if (e.key == "enter") {
-    addBookmark();
-  }
-});
 
 // [ 2 ]
 function display() {
