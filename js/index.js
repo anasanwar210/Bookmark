@@ -175,9 +175,19 @@ function addBookmark() {
   }
 }
 
+window.onload = function () {
+  bookmarkName.focus();
+};
+
 // [ 1.1 ]
-document.addEventListener("keyup", function (e) {
-  if (e.key == "Enter") {
+bookmarkName.addEventListener("keyup", function (e) {
+  if (e.key == "enter") {
+    addBookmark();
+  }
+});
+
+bookmarkURL.addEventListener("keyup", function (e) {
+  if (e.key == "enter") {
     addBookmark();
   }
 });
@@ -302,9 +312,18 @@ function bookmarkSearch() {
       searchResult += appendRowsInTable(i);
     }
   }
+
+  searchInput.addEventListener("keyup", function (e) {
+    if (e.key == "escap") {
+      searchInput.value = null;
+    }
+  });
+  console.log(input);
+
   if (searchResult == "") {
     searchResult += checkAboutBookmarksArray();
   }
+
   showData.innerHTML = searchResult;
 }
 
